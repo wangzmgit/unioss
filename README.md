@@ -4,7 +4,7 @@
 
 ## 安装
 ```
-go get github.com/wangzmgit/uni-oss
+go get github.com/wangzmgit/unioss
 ```
 
 ## 基本用法
