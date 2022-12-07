@@ -1,4 +1,4 @@
-module github.com/wangzmgit/uni-oss
+module github.com/wangzmgit/unioss
 
 go 1.19
 
