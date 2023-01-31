@@ -9,8 +9,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/qiniu/api.v7/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/auth"
+	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"
 )
 
@@ -46,7 +46,7 @@ func (q *Qiniu) init(config Config) error {
 	return nil
 }
 
-//获取文件
+// 获取文件
 func (q *Qiniu) GetObjectToFile(objectKey, filePath string) error {
 	url := q.getDownloadUrl(objectKey)
 	resp, err := http.Get(url)
@@ -70,7 +70,7 @@ func (q *Qiniu) GetObjectToFile(objectKey, filePath string) error {
 	return os.Rename(tempFilePath, filePath)
 }
 
-//删除文件
+// 删除文件
 func (q *Qiniu) DeleteObject(objectKey string) error {
 	return q.bucketManager.Delete(q.config.Bucket, objectKey)
 }
@@ -111,7 +111,7 @@ func (q *Qiniu) IsExists(objectKey string) (bool, error) {
 	return true, nil
 }
 
-//获取下载链接
+// 获取下载链接
 func (q *Qiniu) getDownloadUrl(key string) string {
 	var url string
 
@@ -126,7 +126,7 @@ func (q *Qiniu) getDownloadUrl(key string) string {
 	return url
 }
 
-//获取upToken
+// 获取upToken
 func (q *Qiniu) getUpToken() string {
 	putPolicy := storage.PutPolicy{
 		Scope: q.config.Bucket,
@@ -135,7 +135,7 @@ func (q *Qiniu) getUpToken() string {
 	return putPolicy.UploadToken((*auth.Credentials)(mac))
 }
 
-//获取Uploader
+// 获取Uploader
 func (q *Qiniu) getUploader() *storage.FormUploader {
 	cfg := storage.Config{}
 	// 是否使用https域名
@@ -146,7 +146,7 @@ func (q *Qiniu) getUploader() *storage.FormUploader {
 	return storage.NewFormUploader(&cfg)
 }
 
-//获取访问URL
+// 获取访问URL
 func (q *Qiniu) GetObjectUrl(objectKey string) string {
 	return fmt.Sprintf("https://%s/%s", q.config.Domain, objectKey)
 }
