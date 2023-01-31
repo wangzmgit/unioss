@@ -50,7 +50,7 @@ func (t *Tencent) init(config Config) error {
 	return nil
 }
 
-//获取文件
+// 获取文件
 func (t *Tencent) GetObjectToFile(objectKey, filePath string) error {
 	response, err := t.client.Object.Download(context.Background(), objectKey, filePath, nil)
 	if err != nil {
@@ -64,7 +64,7 @@ func (t *Tencent) GetObjectToFile(objectKey, filePath string) error {
 	return nil
 }
 
-//删除文件
+// 删除文件
 func (t *Tencent) DeleteObject(objectKey string) error {
 	response, err := t.client.Object.Delete(context.Background(), objectKey)
 	if err != nil {
@@ -91,7 +91,7 @@ func (t *Tencent) PutObject(objectKey string, reader io.Reader) error {
 	return nil
 }
 
-//上传文件
+// 上传文件
 func (t *Tencent) PutObjectFromFile(objectKey, filePath string) error {
 	response, err := t.client.Object.PutFromFile(context.Background(), objectKey, filePath, nil)
 	if err != nil {
@@ -109,7 +109,7 @@ func (t *Tencent) IsExists(objectKey string) (bool, error) {
 	return t.client.Object.IsExist(context.Background(), objectKey)
 }
 
-//cos 请求错误
+// cos 请求错误
 func httpError(response *cos.Response) error {
 	bytes, err := io.ReadAll(response.Body)
 	defer func() {
@@ -122,9 +122,9 @@ func httpError(response *cos.Response) error {
 	return errors.New(string(bytes))
 }
 
-//获取访问URL
+// 获取访问URL
 func (t *Tencent) GetObjectUrl(objectKey string) string {
-	if t.config.Domain != "" {
+	if t.config.Domain == "" {
 		return fmt.Sprintf("https://%s-%s.cos.%s.myqcloud.com/%s",
 			t.config.Bucket,
 			t.config.AppID,

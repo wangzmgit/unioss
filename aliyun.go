@@ -48,12 +48,12 @@ func (a *Aliyun) init(config Config) error {
 	return nil
 }
 
-//获取文件
+// 获取文件
 func (a *Aliyun) GetObjectToFile(objectKey, filePath string) error {
 	return a.bucket.GetObjectToFile(objectKey, filePath)
 }
 
-//删除文件
+// 删除文件
 func (a *Aliyun) DeleteObject(objectKey string) error {
 	return a.bucket.DeleteObject(objectKey)
 }
@@ -70,9 +70,9 @@ func (a *Aliyun) IsExists(objectKey string) (bool, error) {
 	return a.bucket.IsObjectExist(objectKey)
 }
 
-//获取访问URL
+// 获取访问URL
 func (a *Aliyun) GetObjectUrl(objectKey string) string {
-	if a.config.Domain != "" {
+	if a.config.Domain == "" {
 		return fmt.Sprintf("https://%s.%s/%s",
 			a.config.Bucket,
 			a.config.Endpoint,
